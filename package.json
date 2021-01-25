@@ -6,6 +6,7 @@
   "author": {
     "name": "dtro-devuk"
   },
+  "repository": {"https://github.com/dtro-devuk/nextjs-tailwind-googlefonts-selfhost-starter"},
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
