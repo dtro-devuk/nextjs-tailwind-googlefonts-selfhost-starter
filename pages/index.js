@@ -1,65 +1,99 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Container from '@/components/Container';
 
-export default function Home() {
+const Home = () => {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Container>
+      <>
+        <h1
+          role="heading"
+          aria-level="1"
+          className=" p-3 text-center text-red-900 font-black text-xl"
         >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
-}
+          The Sample Fonts follow...
+        </h1>
+        <hr />
+        <h2 role="heading" aria-level="2" className=" p-3 text-center text-blue-900 font-bold">
+          Sans Examples
+        </h2>
+        <p className="font-sans font-normal p-3 text-center text-gray-900">
+          Font Sans Serif - Oswald (400)
+        </p>
+        <p className="font-sans font-bold p-3 text-center text-gray-900">
+          Font Sans Serif - Oswald (700)
+        </p>
+        <p className="font-serif font-normal p-3 text-center text-gray-900">
+          Font Sans - Merriweather Regular (400)
+        </p>
+        <p className="font-serif font-bold p-3 text-center text-gray-900">
+          Font Sans - Merriweather Bold (700)
+        </p>
+        <hr />
+
+        <h2
+          role="heading"
+          aria-level="2"
+          className="font-sans p-3 text-center text-blue-900 text-xl"
+        >
+          Variable Fonts
+        </h2>
+
+        <h3
+          role="heading"
+          aria-level="3"
+          className="italic font-Grandstander-VariableFont p-3 text-center text-blue-900 font-bold"
+        >
+          Grandstander Fonts 100-900
+        </h3>
+        <div className="text-center">
+          <p className="font-Grandstander-VariableFont font-thin">Grandstander V 100</p>
+          <br />
+          <p className="font-Grandstander-VariableFont font-extra light">Grandstander V 200</p>
+          <br />
+          <p className="font-Grandstander-VariableFont font-light">Grandstander V 300</p>
+          <br />
+          <p className="font-Grandstander-VariableFont font-normal">Grandstander V 400</p>
+          <br />
+          <p className="font-Grandstander-VariableFont font-medium">Grandstander V 500</p>
+          <br />
+          <p className="font-Grandstander-VariableFont font-semibold">Grandstander V 600</p>
+          <br />
+          <p className="font-Grandstander-VariableFont font-bold">Grandstander V 700</p>
+          <br />
+          <p className="font-Grandstander-VariableFont font-extrabold">Grandstander V 800</p>
+          <br />
+          <p className="font-Grandstander-VariableFont font-black">Grandstander V 900</p>
+          <br />
+
+          <h3
+            role="heading"
+            aria-level="3"
+            className="font-Oswald-VariableFont_wght p-3 text-center text-blue-900 font-bold"
+          >
+            Oswald Fonts 100-900
+          </h3>
+
+          <p className="font-sans font-thin">Oswald V 100</p>
+          <br />
+          <p className="font-sans font-extra light">Oswald V 200</p>
+          <br />
+          <p className="font-sans font-light">Oswald V 300</p>
+          <br />
+          <p className="font-sans font-normal">Oswald V 400</p>
+          <br />
+          <p className="font-sans font-medium">Oswald V 500</p>
+          <br />
+          <p className="font-sans font-semibold">Oswald V 600</p>
+          <br />
+          <p className="font-sans font-bold">Oswald V 700</p>
+          <br />
+          <p className="font-sans font-extrabold">Oswald V 800</p>
+          <br />
+          <p className="font-sans font-black">Oswald V 900</p>
+          <br />
+        </div>
+      </>
+    </Container>
+  );
+};
+
+export default Home;

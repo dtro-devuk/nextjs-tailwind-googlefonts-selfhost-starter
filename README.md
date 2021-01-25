@@ -1,34 +1,240 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+<h1 align="center">
+Self-Hosting Google Fonts in Next.js when using Taiwind CSS
+</h1>
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
+## Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Introduction](#introduction)
+- [Hosting Google Fonts is Free?](#hosting-google-fonts-is-free)
+- [Setup](#setup)
+  - [Font Loading](#font-loading)
+  - [Optimising for no FOUT or FOIT](#optimising-for-no-fout-or-foit)
+    - [Font Display Swap](#font-display-swap)
+  - [Preloading Crticial Resources](#preloading-crticial-resources)
+  - [Tailwind Configuration](#tailwind-configuration)
+  - [The Fonts CSS Fle](#the-fonts-css-fle)
+  - [Tailwind base CSS](#tailwind-base-css)
+    - [Tailwind config file](#tailwind-config-file)
+- [Reasons for self-hosting](#reasons-for-self-hosting)
+- [Next](#next)
+- [Further reading](#further-reading)
+  - [Tools](#tools)
+  - [Npm packages](#npm-packages)
+
+## Introduction
+
+Typography can make your applications `zing`. Adding Google Fonts can help here and there are over 900+ font famalies to choose from. There are number of web safe fonts, that are free and built into various platforms. However, sometimes we need something that is more customised, to server our desing purposes.
+
+So "without much further-a-do"
+This `repo` specifically targets the self-hosting of Google Fonts, rather than using a link to their CDN, and how to do it integrate them into a Next.js app that uses Tailwind CSS.
+
+There are number of pros and cons for self-hosting, which have been discussed in many articles and blogs, which I wont go into detail. I will provide links a few of at the end of this readme, for further reading.
+
+## Hosting Google Fonts is Free?
+
+Don't take my word for it, (I'm no laywer and this is not leagal advice), but all fonts used in this example are sourced from Google Fonts under the SIL Open Font License (OFL) V1.1. I have taken care to incorporate the licenses into the self-hosting folders within the repo, which is requested in the OFL.
+
+You should always read the font license information yourself since you're responsible for following it. At this time Google Fonts use OFL v1.1, some use the Apache 2 license. The Ubuntu fonts use the Ubuntu Font License v1.0
+
+You should seek legal advice before self-hosting or using any Custom Fonts.
+
+## Setup
+
+You can get hold of Google fonts in a number of ways, (this is not an exhausitive list), using the following tools:
+
+- Google Fonts Browser
+- Google Fonts Helper
+
+Fonts can also be found on Googles Github Repo.
+
+> I've structured the font resource locations as follows, you dont have to follow this, it demonstrates flexibility and that all fonts can be organised rather than just being placed under the `fonts` sub folder below.
+
+```code
+ ├── public
+ |   └── fonts
+ |       └── google
+ │           ├── font(s) by name
+ │           │      │   ├── .woff / .ttf (etc)
+ │           │      │   ├── .css
+ │           │      │   ├── licence.txt
+ ├── styles
+ |   └── global.css
+ ├── .gitignore
+ ├── jsconfig.json
+ ├── postcss.config.js
+ ├── tailwind.config.js
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Font Loading
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Once we have downloaded the files and licenses and structured the folders, we need to perform font loading.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+We can use ***@font-face*** to load the fonts. See the .css files placed alongside the font resources in the font folder above.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+We can import these into the tailwind styles CSS file. Normally this is called global.css, I'm using 3 files which are imported into the Next.js _app.js file.
 
-## Learn More
+For example:
 
-To learn more about Next.js, take a look at the following resources:
+```css
+@font-face {
+    font-family: 'Grandstander Variable';
+    font-style: normal;
+    font-weight: 100 900;
+    src: local('Granstander'),
+      url(/fonts/google/grandstander/Grandstander-VariableFont_wght.ttf) format('truetype');
+    font-display: swap; 
+    };
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Optimising for no FOUT or FOIT
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+I've dones some small optimisations for the font(s) loading using the `font-display` attribute. 
 
-## Deploy on Vercel
+- FOUT (Flash of Unstyled Text).
+- FOIT (Flash of Invisible Text).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+By using `@font-face` in combination with `font-display` attributes we can prevent FOUT and FOIT.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+There are a number of strategies available to implement this:
+
+| Strategy | Description |
+|---| ---|
+|1. `block` | dont render anything to the use until the fonts loaded. |
+|2. `swap` | recommended for google fonts. Typically, not much flashing since Google CDN quite fast. |
+|3. `fallback` | not recommended. It still shows invisible text like block for a short time, but will eventually fallback to a safe font |
+|4. `optional` | a good choice when font is not important, more focus on brand and content. Is like slow connected fallback that might not even load a font. |
+
+#### Font Display Swap
+
+This is a new rule you can add to your font-face declaration that tells the browser to use the fallback system safe-fonts you have listed (e.g. Sans Serif), then swap to the desired font when it has been downloaded.
+
+Its a good performance improvement as it displays content without waiting fopr downloads to finish.
+
+`font-display: swap;` does have the drawback of flashing this unstyled text if the font has yet to load. But we can remedy that with Preload.
+
+### Preloading Crticial Resources
+
+We can [preload](https://web.dev/preload-critical-assets/) our fonts in the `<head>` of our page app. This is especially useful for those critical bits of typography that we want to display without flashing.
+
+Tod this I added `<preload>` to the head of my page, we can do this by adding it into the custom document file for Next.js: `_document.js`:
+
+```html
+        <Head>
+          <link
+            rel="preload"
+            href="/fonts/google/grandstander/Grandstander-VariableFont_wght.ttf"
+            as="font"
+            type="font/ttf"
+            crossOrigin="anonymous"
+          />
+```
+
+Its recommended to be careful when using Preload, as it can have a negative effect, if overused. So we use it wisely.  Its a way of setting the importance of a resource, we can also do the same for our `script` resources if needs be.
+
+### Tailwind Configuration
+
+### The Fonts CSS Fle
+
+Next I create a `Fonts.css` file under the `public\fonts` folder. This is where I import the various CCS files for the Google Font resources loaded using `@font-face` above, i.e.
+
+```css
+
+@import './google/grandstander/Grandstander-Variable.css';
+
+```
+
+This is then imported into the tailwind style file below.
+
+### Tailwind base CSS
+
+Next we add the following to the `app-base.css` file under the `./styles` folder.
+
+We use the `@layer` directive to tell Tailwind which "bucket" we adding the font styles too.
+Valid layers are a base, components, and utilities.
+
+```code
+@layer base {
+    @import "../public/fonts/fonts.css";
+  }
+```
+
+We then import the styles to the _app.js file
+
+```code
+import '@/styles/app-base.css';
+import '@/styles/app-components.css';
+import '@/styles/app-utilities.css';
+```
+
+#### Tailwind config file
+
+Finally, we set up the `tailwind.config.js` file to add the font familes to our app.
+We either add them to the base font themes or extend the themes (or both).
+
+For example:
+
+```code
+const { fontFamily } = require('tailwindcss/defaultTheme');
+
+module.exports = {
+    fontFamily: {
+      sans: ['Oswald Variable, Arial', fontFamily.serif],
+      serif: ['Merriweather Sans, Georgia', fontFamily.serif],
+    },
+    extend: {
+      fontFamily: {
+        'Grandstander-VariableFont': ['Grandstander Variable'],
+      },
+    },
+      },
+;
+```
+
+---
+
+## Reasons for self-hosting
+
+The main reasons I choose to self host, are as follows:
+
+|||
+|---| ---|
+|1. **Google Recommends it** | Its now recommended by Google themselves. Since 2018, Google has recommended self hosting, for optimal peformance through preloading. Self-hosting is free and is encouraged, see this video [Google Chrome Developers: Web Performance made easy](https://youtu.be/Mv-l3-tJgGk). |
+|2. **better for privacy** | 3rd party CDNs can use cookies and tracking algorithms you dont neccessarily know about. This can be a problem in countries where you need user consent, (i.e. Data Privacy and GDPR, see:  [GDPR-compliance of Google Fonts](https://complianz.io/google-fonts-and-gdpr-does-it-work/). |
+|3. **better for security** | more control on your own server).  You actually call at least 2 domains when using the CDN.|
+|4. **faster and more peformant**| Google Fonts add resources that you may not need. You can choose font styles, etc and bundle and minify your own font-related CSS rules/files, giving fewer http requests. You can do this by ownly serving the specific fonts and unicodes you need for your sites typography. Specifiying parts of font familes rather than whole families. You can choose font styles, etc and bundle and minify your own font-related CSS rules/files, giving fewer http requests.|
+|5.**offline availability**| for mobile and desktop apps that are accessed offline. |
+
+---
+
+## Next
+
+- Try this out for yourself.
+
+- I would encourage you to test with your specific site/app and use the dev tools combined with "disable cache" and the built-in ability to change connection speeds.
+
+- I have not covered the use of `npm packages` to add fonts. There are a number of flavours available online if this is your preference.
+- Some alternatives are to try using _Fontsource_, or _next-google-fonts_.
+
+---
+
+## Further reading
+
+- [WP Speed Matters : Why you should Self-Host Google Fonts in 2021](https://wpspeedmatters.com/self-host-google-fonts/)
+- [evatototuts+ : How to Self-Host Google Fonts on Your Own Server](https://webdesign.tutsplus.com/tutorials/how-to-self-host-google-fonts--cms-34775)
+- [Using @font-face](https://css-tricks.com/snippets/css/using-font-face/)
+
+### Tools
+
+- [Google Fonts Browser](https://fonts.google.com/)
+- [Google Fonts Repo](https://github.com/google/fonts)
+
+### Npm packages
+
+- [Fontsource](https://fontsource.org/) | [GitHub: Fontsource](https://github.com/fontsource/fontsource) | [Self-host Google Fonts in your next React project with Fontsource](https://dev.to/danwalsh/self-host-google-fonts-in-your-next-react-project-with-fontsource-1n07)
+- [GitHub: Google Font Metadata](https://github.com/fontsource/google-font-metadata)
+- [GitHub: next-google-fonts](https://github.com/joe-bell/next-google-fonts)

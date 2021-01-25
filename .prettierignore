@@ -1,0 +1,8 @@
+# Ignore artifacts
+node_modules
+.next
+.vercel
+.cache  
+package.json
+package-lock.json
+public

@@ -1,7 +1,9 @@
-import '../styles/globals.css'
+import '@/styles/app-base.css';
+import '@/styles/app-components.css';
+import '@/styles/app-utilities.css';
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
-}
+const MyApp = ({ Component, pageProps }) => {
+  return <Component {...pageProps} />;
+};
 
-export default MyApp
+export default MyApp;

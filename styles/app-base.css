@@ -1,0 +1,43 @@
+ /* 
+ 
+ css
+├── app-base.css
+├── app-components.css
+├── app-utilities.css
+├── components
+│   ├── global.css
+│   ├── typography.css
+│   └── webfonts.css
+├── pages
+│   └── homepage.css
+└── vendor.css 
+/**
+* Add Google Fonts to the base styles
+*/
+@layer base {
+    @import "../public/fonts/fonts.css";
+  }
+
+ /**
+ * This injects Tailwind's base styles, which is a combination of
+ * Normalize.css and some additional base styles.
+ */
+ @import 'tailwindcss/base';
+
+ /**
+  * Here we add custom base styles, applied after the tailwind-base
+  * classes
+  *
+  */
+
+  /* Page content */
+.content {
+    padding: 16px;
+  }
+  
+.sticky-header {
+    position: sticky;
+    z-index: 10;
+    top: 0;
+}
+
