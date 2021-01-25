@@ -31,7 +31,7 @@ Self-Hosting Google Fonts in Next.js with Taiwind CSS
 
 **Typography can make your applications :sparkles: zing :sparkles:!!!**
 
-Adding Google Fonts allow you to use _custom fonts_ on your apps.
+Adding Google Fonts allows you to use _custom fonts_ in your apps.
 They are advertised as free and there are over 900+ font families to choose from. Since 2018, Google has recommended self-hosting as a way to add their fonts.
 
 There are number of _web safe_ fonts, that are free and built into various platforms. However, sometimes we need something that is more customised, to serve our design purposes.
@@ -40,16 +40,17 @@ So "without much further-a-do"...
 
 This `repo` specifically targets the self-hosting of Google Fonts, rather than using a link to their CDN, and how to integrate them into a Next.js app that uses Tailwind CSS.
 
-There are number of pros and cons for self-hosting, which have been discussed in many articles and blogs, I wont be detailing this here. I have provided a few links at the end of this readme file, for further reading.
+There are number of pros and cons for self-hosting, which have been discussed in many articles and blogs, I wont be detailing these here. I have provided a few links at the end of this readme file, for further reading.
 
 ## Hosting Google Fonts is Free?
 
 Google Fonts are advertised as Open Source and free to use...
+
 But Don't take my word for it, (I'm no laywer and this is not legal advice)
 
 All fonts used in this example are sourced from Google Fonts under the SIL Open Font License (OFL) V1.1. I have taken care to incorporate the licenses into the self-hosting folders within the repo, which is requested in the OFL.
 
-Note: you should always read the font license information yourself since you're responsible for following it. At this time Google Fonts use OFL v1.1, some use the Apache 2 license. The Ubuntu fonts use the Ubuntu Font License v1.0
+:bulb: Note: you should always read the font license information yourself since you're responsible for following it. At this time Google Fonts use OFL v1.1, some use the Apache 2 license. The Ubuntu fonts use the Ubuntu Font License v1.0
 
 You should seek legal advice before self-hosting or using any Custom Fonts.
 
@@ -87,13 +88,13 @@ The easiest way to host them is under a `public` folder, in a sub folder named `
 
 ```
 
-The fonts will be serverd from this location to our Bext.js app.
+The fonts will be serverd from this location to our Next.js app.
 
 ### Font Loading
 
-Once we have downloaded the files and licenses and structured the folders, we need to perform font loading.
+Once we have downloaded the font files, licenses, stylesheets etc and structured the folders, we need to perform font loading.
 
-We can use ***@font-face*** to load the fonts. See the .css files placed alongside the font resources in the `font` folder above.
+We can use ***@font-face*** to load the fonts. See the CSS files placed alongside the font resources in the `font` folder above.
 
 We can eventually import these into the Tailwind styles CSS file. Normally this is called `global.css`, I'm using 3 files which are imported into the Next.js _app.js file.
 
@@ -112,7 +113,7 @@ For example:
 
 ### Optimising for no FOUT or FOIT
 
-I've dones some small optimisations for the font(s) loading using the `font-display` attribute. 
+We next perform some small optimisations for the font(s) loading using the `font-display` attribute.
 
 - FOUT (Flash of Unstyled Text).
 - FOIT (Flash of Invisible Text).
@@ -123,16 +124,16 @@ There are a number of strategies available to implement this:
 
 | Strategy | Description |
 |---| ---|
-|1. `block` | dont render anything to the use until the fonts loaded. |
-|2. `swap` | recommended for google fonts. Typically, not much flashing since Google CDN quite fast. |
-|3. `fallback` | not recommended. It still shows invisible text like block for a short time, but will eventually fallback to a safe font |
+|1. `block` | dont render anything to the user until the fonts loaded. |
+|2. `swap` | recommended for google fonts. it will swap out once the font loads.|
+|3. `fallback` | not recommended. It still shows invisible text like block for a short time, but will eventually fallback to a safe font. |
 |4. `optional` | a good choice when font is not important, more focus on brand and content. Is like slow connected fallback that might not even load a font. |
 
 #### Font Display Swap
 
 This is a new rule you can add to your font-face declaration that tells the browser to use the fallback system safe-fonts you have listed (e.g. Sans Serif), then swap to the desired font when it has been downloaded.
 
-Its a good performance improvement as it displays content without waiting fopr downloads to finish.
+Its a good performance improvement as it displays content without waiting for downloads to finish.
 
 `font-display: swap;` does have the drawback of flashing this unstyled text if the font has yet to load. But we can remedy that with Preload.
 
@@ -140,30 +141,33 @@ Its a good performance improvement as it displays content without waiting fopr d
 
 We can [preload](https://web.dev/preload-critical-assets/) our fonts in the `<head>` of our page app. This is especially useful for those critical bits of typography that we want to display without flashing.
 
-Tod this I added `<preload>` to the head of my page, we can do this by adding it into the custom document file for Next.js: `_document.js`:
+Todo this, we can add `<preload>` to the head of our page(s).
+
+In Next.js we add it into the custom `_document.js` as follows:
 
 ```html
-        <Head>
-          <link
-            rel="preload"
-            href="/fonts/google/grandstander/Grandstander-VariableFont_wght.ttf"
-            as="font"
-            type="font/ttf"
-            crossOrigin="anonymous"
-          />
+<Head>
+    <link
+    rel="preload"
+    href="/fonts/google/grandstander/Grandstander-VariableFont_wght.ttf"
+    as="font"
+    type="font/ttf"
+    crossOrigin="anonymous"
+    />
+</Head>
 ```
 
-Its recommended to be careful when using Preload, as it can have a negative effect, if overused. So we use it wisely.  Its a way of setting the importance of a resource, we can also do the same for our `script` resources if needs be.
+:bulb: Note: be careful when using Preload, as it can have a negative effect, if overused. So we use it wisely.  Its a way of setting the importance of a resource, we can also do the same for our `script` resources if needs be.
 
 ### Tailwind Configuration
 
 ### The Fonts CSS Fle
 
-Next I create a `Fonts.css` file under the `public\fonts` folder. This is where I import the various CCS files for the Google Font resources loaded using `@font-face` above, i.e.
+Next we create a `Fonts.css` file under the `public\fonts` folder. This is where we import the various CCS files for the Google Font resources loaded using `@font-face` above, i.e.
 
 ```css
 
-@import './google/grandstander/Grandstander-Variable.css';
+@import './google/oswald/Oswald-Variable.css';
 
 ```
 
@@ -173,8 +177,11 @@ This is then imported into the tailwind style file below.
 
 Next we add the following to the `app-base.css` file under the `./styles` folder.
 
-We use the `@layer` directive to tell Tailwind which "bucket" we adding the font styles too.
-Valid layers are a base, components, and utilities.
+We use the `@layer` directive to tell Tailwind which "bucket" we are adding the font styles too.
+
+Valid layer directives are a base, components, and utilities.
+
+For example:
 
 ```code
 @layer base {
@@ -182,7 +189,7 @@ Valid layers are a base, components, and utilities.
   }
 ```
 
-We then import the styles to the _app.js file
+We then import the styles to the `_app.js` file:
 
 ```code
 import '@/styles/app-base.css';
@@ -214,13 +221,19 @@ module.exports = {
 ;
 ```
 
+That's it. We are done, see the code for more detail.
+Thanks for reading. :smile: :thumbsup:
+:star: :star: :star: Please star me, if you found this useful. :star: :star: :star:
+
+Here follows, :books: more information :books: for those that may find it useful. :point_down:
+
 ---
 
 ## Lighthouse Score
 
-Remember you can use lighthouse to test the performance of your page, this will all look for Font and Scripts optimsations and include recommendations, including FOUT and FOIT issues.
+Remember you can use lighthouse to test the performance of your page, this will also look for Font and Scripts optimsations and include recommendations, including FOUT and FOIT issues.
 
-Once build I'm pleased to say this demo gets the following when running locally.
+Once built I'm pleased to say this demo gets the following when running locally.
 
 ![Lighthouse Scores](./public/static/images/lighthouse-score.JPG)
 
@@ -229,9 +242,9 @@ Once build I'm pleased to say this demo gets the following when running locally.
 The main reasons I choose to self host, are as follows:
 
 |||
-|---| ---|
-|1. **Google Recommends it** | Its now recommended by Google themselves. Since 2018, Google has recommended self hosting, for optimal peformance through preloading. Self-hosting is free and is encouraged, see this video [Google Chrome Developers: Web Performance made easy](https://youtu.be/Mv-l3-tJgGk). |
-|2. **better for privacy** | 3rd party CDNs can use cookies and tracking algorithms you dont neccessarily know about. This can be a problem in countries where you need user consent, (i.e. Data Privacy and GDPR, see:  [GDPR-compliance of Google Fonts](https://complianz.io/google-fonts-and-gdpr-does-it-work/). |
+|---| ---|  
+|1. **Google recommends it** | Its now recommended by Google themselves. Since 2018, Google has recommended self hosting, for optimal peformance through preloading. Self-hosting is free and is encouraged, see this video: [Google Chrome Developers: Web Performance made easy](https://youtu.be/Mv-l3-tJgGk). |
+|2. **better for privacy** | 3rd party CDN's can use cookies and tracking algorithms you dont neccessarily know about. This can be a problem in countries where you need user consent, (i.e. Data Privacy and GDPR, see:  [GDPR-compliance of Google Fonts](https://complianz.io/google-fonts-and-gdpr-does-it-work/). |
 |3. **better for security** | more control on your own server).  You actually call at least 2 domains when using the CDN.|
 |4. **faster and more peformant**| Google Fonts add resources that you may not need. You can choose font styles, etc and bundle and minify your own font-related CSS rules/files, giving fewer http requests. You can do this by ownly serving the specific fonts and unicodes you need for your sites typography. Specifiying parts of font familes rather than whole families. You can choose font styles, etc and bundle and minify your own font-related CSS rules/files, giving fewer http requests.|
 |5.**offline availability**| for mobile and desktop apps that are accessed offline. |
