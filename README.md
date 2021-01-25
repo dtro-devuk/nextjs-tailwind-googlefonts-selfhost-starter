@@ -24,7 +24,7 @@ Self-Hosting Google Fonts in Next.js with Taiwind CSS
 - [Reasons for self-hosting](#reasons-for-self-hosting)
 - [Next](#next)
 - [Further reading](#further-reading)
-  - [Tools](#tools)
+  - [Tools Used](#tools-used)
   - [Npm packages](#npm-packages)
 
 ## Introduction
@@ -270,13 +270,13 @@ The main reasons I choose to self host, are as follows:
 - [evatototuts+ : How to Self-Host Google Fonts on Your Own Server](https://webdesign.tutsplus.com/tutorials/how-to-self-host-google-fonts--cms-34775)
 - [Using @font-face](https://css-tricks.com/snippets/css/using-font-face/)
 
-### Tools
+### Tools Used
 
 - [Google Fonts Browser](https://fonts.google.com/)
-- [Google Fonts Repo](https://github.com/google/fonts)
-
+- [Google Web Fonts Helper](https://google-webfonts-helper.herokuapp.com/fonts)
+  
 ### Npm packages
 
-- [Fontsource](https://fontsource.org/) | [GitHub: Fontsource](https://github.com/fontsource/fontsource) | [Self-host Google Fonts in your next React project with Fontsource](https://dev.to/danwalsh/self-host-google-fonts-in-your-next-react-project-with-fontsource-1n07)
+- [GitHub: Fontsource](https://github.com/fontsource/fontsource)
 - [GitHub: Google Font Metadata](https://github.com/fontsource/google-font-metadata)
 - [GitHub: next-google-fonts](https://github.com/joe-bell/next-google-fonts)
