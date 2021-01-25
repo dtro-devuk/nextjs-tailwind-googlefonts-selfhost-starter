@@ -222,7 +222,9 @@ module.exports = {
 ```
 
 That's it. We are done, see the code for more detail.
+
 Thanks for reading. :smile: :thumbsup:
+
 :star: :star: :star: Please star me, if you found this useful. :star: :star: :star:
 
 Here follows, :books: more information :books: for those that may find it useful. :point_down:
