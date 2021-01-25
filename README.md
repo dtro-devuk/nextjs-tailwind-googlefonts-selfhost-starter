@@ -1,6 +1,6 @@
 
 <h1 align="center">
-Self-Hosting Google Fonts in Next.js when using Taiwind CSS
+Self-Hosting Google Fonts in Next.js with Taiwind CSS
 </h1>
 
 ---
