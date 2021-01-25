@@ -11,6 +11,7 @@ Self-Hosting Google Fonts in Next.js when using Taiwind CSS
 - [Introduction](#introduction)
 - [Hosting Google Fonts is Free?](#hosting-google-fonts-is-free)
 - [Setup](#setup)
+  - [Resource Folder structure](#resource-folder-structure)
   - [Font Loading](#font-loading)
   - [Optimising for no FOUT or FOIT](#optimising-for-no-fout-or-foit)
     - [Font Display Swap](#font-display-swap)
@@ -19,6 +20,7 @@ Self-Hosting Google Fonts in Next.js when using Taiwind CSS
   - [The Fonts CSS Fle](#the-fonts-css-fle)
   - [Tailwind base CSS](#tailwind-base-css)
     - [Tailwind config file](#tailwind-config-file)
+- [Lighthouse Score](#lighthouse-score)
 - [Reasons for self-hosting](#reasons-for-self-hosting)
 - [Next](#next)
 - [Further reading](#further-reading)
@@ -27,32 +29,43 @@ Self-Hosting Google Fonts in Next.js when using Taiwind CSS
 
 ## Introduction
 
-Typography can make your applications :sparkles: zing :sparkles:. Adding Google Fonts can help here and there are over 900+ font famalies to choose from. There are number of web safe fonts, that are free and built into various platforms. However, sometimes we need something that is more customised, to serve our design purposes.
+Typography can make your applications :sparkles: zing :sparkles:. 
+
+Adding Google Fonts can help here and there are over 900+ font famalies to choose from. There are number of web safe fonts, that are free and built into various platforms. However, sometimes we need something that is more customised, to serve our design purposes.
 
 So "without much further-a-do"...
 
-This `repo` specifically targets the self-hosting of Google Fonts, rather than using a link to their CDN, and how to do it integrate them into a Next.js app that uses Tailwind CSS.
+This `repo` specifically targets the self-hosting of Google Fonts, rather than using a link to their CDN, and how to integrate them into a Next.js app that uses Tailwind CSS.
 
-There are number of pros and cons for self-hosting, which have been discussed in many articles and blogs, which I wont go into detail. I will provide links a few of at the end of this readme, for further reading.
+There are number of pros and cons for self-hosting, which have been discussed in many articles and blogs, which I wont go into detail here. However, I have provided a few links at the end of this readme file, for further reading.
 
 ## Hosting Google Fonts is Free?
 
-Don't take my word for it, (I'm no laywer and this is not leagal advice), but all fonts used in this example are sourced from Google Fonts under the SIL Open Font License (OFL) V1.1. I have taken care to incorporate the licenses into the self-hosting folders within the repo, which is requested in the OFL.
+Google Fonts are advertised as Open Source and free to use... 
+But Don't take my word for it, (I'm no laywer and this is not legal advice)
 
-You should always read the font license information yourself since you're responsible for following it. At this time Google Fonts use OFL v1.1, some use the Apache 2 license. The Ubuntu fonts use the Ubuntu Font License v1.0
+All fonts used in this example are sourced from Google Fonts under the SIL Open Font License (OFL) V1.1. I have taken care to incorporate the licenses into the self-hosting folders within the repo, which is requested in the OFL.
+
+Note: you should always read the font license information yourself since you're responsible for following it. At this time Google Fonts use OFL v1.1, some use the Apache 2 license. The Ubuntu fonts use the Ubuntu Font License v1.0
 
 You should seek legal advice before self-hosting or using any Custom Fonts.
 
 ## Setup
 
-You can get hold of Google fonts in a number of ways, (this is not an exhausitive list), using the following tools:
+You can get hold of Google Fonts in a number of ways, (this is not an exhausitive list), using the following tools:
 
 - Google Fonts Browser
 - Google Fonts Helper
 
 Fonts can also be found on Googles Github Repo.
 
-> I've structured the font resource locations as follows, you dont have to follow this, it demonstrates flexibility and that all fonts can be organised rather than just being placed under the `fonts` sub folder below.
+Once, you have downloaded them you can add them to your project to self-host.
+
+### Resource Folder structure
+
+The easiest way to host them is under a `public` folder, in a sub folder named `fonts`.
+
+> I've structured the font resource locations as follows, you dont have to follow this, it demonstrates flexibility and that all fonts can be organised rather than just being placed under the `fonts` sub folder.
 
 ```code
  ├── public
@@ -63,7 +76,7 @@ Fonts can also be found on Googles Github Repo.
  │           │      │   ├── .css
  │           │      │   ├── licence.txt
  ├── styles
- |   └── global.css
+ |   └── global.css (app-base.css)
  ├── .gitignore
  ├── jsconfig.json
  ├── postcss.config.js
@@ -71,25 +84,27 @@ Fonts can also be found on Googles Github Repo.
 
 ```
 
+The fonts will be serverd from this location to our Bext.js app.
+
 ### Font Loading
 
 Once we have downloaded the files and licenses and structured the folders, we need to perform font loading.
 
-We can use ***@font-face*** to load the fonts. See the .css files placed alongside the font resources in the font folder above.
+We can use ***@font-face*** to load the fonts. See the .css files placed alongside the font resources in the `font` folder above.
 
-We can import these into the tailwind styles CSS file. Normally this is called global.css, I'm using 3 files which are imported into the Next.js _app.js file.
+We can eventually import these into the Tailwind styles CSS file. Normally this is called `global.css`, I'm using 3 files which are imported into the Next.js _app.js file.
 
 For example:
 
 ```css
 @font-face {
-    font-family: 'Grandstander Variable';
+    font-family: 'Oswald Variable';  /*Ive added a prefix to let me know its a variable font*/
     font-style: normal;
-    font-weight: 100 900;
-    src: local('Granstander'),
-      url(/fonts/google/grandstander/Grandstander-VariableFont_wght.ttf) format('truetype');
+    font-weight: 200 700;
+    src: local('Oswald'),
+        url(/fonts/google/oswald/Oswald-VariableFont_wght.ttf) format('truetype');
     font-display: swap; 
-    };
+}
 ```
 
 ### Optimising for no FOUT or FOIT
@@ -197,6 +212,14 @@ module.exports = {
 ```
 
 ---
+
+## Lighthouse Score
+
+Remember you can use lighthouse to test the performance of your page, this will all look for Font and Scripts optimsations and include recommendations, including FOUT and FOIT issues.
+
+Once build I'm pleased to say this demo gets the following when running locally.
+
+![Lighthouse Scores](./public/static/images/lighthouse-score.JPG)
 
 ## Reasons for self-hosting
 
