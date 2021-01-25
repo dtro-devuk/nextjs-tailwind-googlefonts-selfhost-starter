@@ -29,19 +29,22 @@ Self-Hosting Google Fonts in Next.js with Taiwind CSS
 
 ## Introduction
 
-Typography can make your applications :sparkles: zing :sparkles:. 
+**Typography can make your applications :sparkles: zing :sparkles:!!!**
 
-Adding Google Fonts can help here and there are over 900+ font famalies to choose from. There are number of web safe fonts, that are free and built into various platforms. However, sometimes we need something that is more customised, to serve our design purposes.
+Adding Google Fonts allow you to use _custom fonts_ on your apps.
+They are advertised as free and there are over 900+ font families to choose from. Since 2018, Google has recommended self-hosting as a way to add their fonts.
+
+There are number of _web safe_ fonts, that are free and built into various platforms. However, sometimes we need something that is more customised, to serve our design purposes.
 
 So "without much further-a-do"...
 
 This `repo` specifically targets the self-hosting of Google Fonts, rather than using a link to their CDN, and how to integrate them into a Next.js app that uses Tailwind CSS.
 
-There are number of pros and cons for self-hosting, which have been discussed in many articles and blogs, which I wont go into detail here. However, I have provided a few links at the end of this readme file, for further reading.
+There are number of pros and cons for self-hosting, which have been discussed in many articles and blogs, I wont be detailing this here. I have provided a few links at the end of this readme file, for further reading.
 
 ## Hosting Google Fonts is Free?
 
-Google Fonts are advertised as Open Source and free to use... 
+Google Fonts are advertised as Open Source and free to use...
 But Don't take my word for it, (I'm no laywer and this is not legal advice)
 
 All fonts used in this example are sourced from Google Fonts under the SIL Open Font License (OFL) V1.1. I have taken care to incorporate the licenses into the self-hosting folders within the repo, which is requested in the OFL.
