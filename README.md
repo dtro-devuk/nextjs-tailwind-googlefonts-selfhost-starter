@@ -27,9 +27,10 @@ Self-Hosting Google Fonts in Next.js when using Taiwind CSS
 
 ## Introduction
 
-Typography can make your applications `zing`. Adding Google Fonts can help here and there are over 900+ font famalies to choose from. There are number of web safe fonts, that are free and built into various platforms. However, sometimes we need something that is more customised, to server our desing purposes.
+Typography can make your applications :sparkles: zing :sparkles:. Adding Google Fonts can help here and there are over 900+ font famalies to choose from. There are number of web safe fonts, that are free and built into various platforms. However, sometimes we need something that is more customised, to serve our design purposes.
 
-So "without much further-a-do"
+So "without much further-a-do"...
+
 This `repo` specifically targets the self-hosting of Google Fonts, rather than using a link to their CDN, and how to do it integrate them into a Next.js app that uses Tailwind CSS.
 
 There are number of pros and cons for self-hosting, which have been discussed in many articles and blogs, which I wont go into detail. I will provide links a few of at the end of this readme, for further reading.
