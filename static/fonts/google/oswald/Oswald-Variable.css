@@ -3,7 +3,7 @@
     font-style: normal;
     font-weight: 200 700;
     src: local('Oswald'),
-        url(/fonts/google/oswald/Oswald-VariableFont_wght.ttf) format('truetype');
+        url(/static/fonts/google/oswald/Oswald-VariableFont_wght.ttf) format('truetype');
     font-display: swap;  /* Perf optimization - See https://web.dev/font-display */
 }
   
