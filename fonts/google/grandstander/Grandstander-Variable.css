@@ -3,7 +3,7 @@
     font-style: normal;
     font-weight: 100 900;
     src: local('Granstander'),
-      url(/static/fonts/google/grandstander/Grandstander-VariableFont_wght.ttf) format('truetype');
+      url(/fonts/google/grandstander/Grandstander-VariableFont_wght.ttf) format('truetype');
     font-display: swap; /* Perf optimization - See https://web.dev/font-display */
     };
 
@@ -12,6 +12,6 @@
     font-style: normal;
     font-weight: 100 900;
     src: local('Granstander'),
-        url(/static/fonts/google/grandstander/Grandstander-Italic-VariableFont_wght.ttf) format('truetype');
+        url(/fonts/google/grandstander/Grandstander-Italic-VariableFont_wght.ttf) format('truetype');
     font-display: swap;  /* Perf optimization - See https://web.dev/font-display */
     };
