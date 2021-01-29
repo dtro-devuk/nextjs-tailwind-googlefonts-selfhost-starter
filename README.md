@@ -1,15 +1,22 @@
-
 <h1 align="center">
 Self-Hosting Google Fonts in Next.js with Taiwind CSS
 </h1>
-
 ---
+
+## IMPORTANT this readme is being updated as the code has changed, please bare with me!!!
+
+- Now using a hook to load the google fonts using Font Face Observer
+- and to Preload the Fonts
+- Font folder location changed to /static/fonts
 
 ## Table of Contents
 
+- [</h1>](#h1)
+- [IMPORTANT this readme is being updated as the code has changed, please bare with me!!!](#important-this-readme-is-being-updated-as-the-code-has-changed-please-bare-with-me)
 - [Table of Contents](#table-of-contents)
 - [Introduction](#introduction)
 - [Hosting Google Fonts is Free?](#hosting-google-fonts-is-free)
+- [Demo](#demo)
 - [Setup](#setup)
   - [Resource Folder structure](#resource-folder-structure)
   - [Font Loading](#font-loading)
@@ -53,6 +60,10 @@ All fonts used in this example are sourced from Google Fonts under the SIL Open 
 :bulb: Note: you should always read the font license information yourself since you're responsible for following it. At this time Google Fonts use OFL v1.1, some use the Apache 2 license. The Ubuntu fonts use the Ubuntu Font License v1.0
 
 You should seek legal advice before self-hosting or using any Custom Fonts.
+
+## Demo
+
+[See the code demo'd here](https://dtro-devuk.github.io/nextjs-tailwind-googlefonts-selfhost-starter/)
 
 ## Setup
 

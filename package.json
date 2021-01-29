@@ -1,8 +1,9 @@
 {
+  "homepage": "https://dtro-devuk.github.io/nextjs-tailwind-googlefonts-selfhost-starter/",
   "name": "nextjs-tailwind-googlefonts-selfhost",
-  "description": "My nextjs and tailwind starter template, with google fonts self-hosted and optimised.",
+  "description": "Nextjs v10 and tailwind css v2.0 starter template, with google fonts self-hosted and optimised.",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "author": {
     "name": "dtro-devuk"
   },
@@ -14,17 +15,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
-  },
-  "dependencies": {
-    "autoprefixer": "^10.2.3",
-    "next": "10.0.5",
-    "postcss": "^8.2.4",
-    "postcss-flexbugs-fixes": "^5.0.2",
-    "postcss-preset-env": "^6.7.0",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
-    "tailwindcss": "^2.0.2"
+    "start": "next start",
+    "deploy-local": "next build && next export",
+    "deploy-localws": "next build && next export && npx serve out",
+    "deploy-gp": "touch out/.nojekyll && git add -f out/ && git commit -m \"Deploy gh-pages\" && git subtree push --prefix out origin gh-pages"
   },
   "prettier": {
     "arrowParens": "always",
@@ -36,7 +30,23 @@
     "semi": true,
     "bracketSpacing": true
   },
+  "dependencies": {
+    "next": "10.0.5",
+    "next-compose-plugins": "^2.2.0",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "tailwindcss": "^2.0.2"
+  },
   "devDependencies": {
-    "prettier": "^2.2.1"
+    "autoprefixer": "^10.2.3",
+    "file-loader": "^6.2.0",
+    "fontfaceobserver": "^2.1.0",
+    "postcss": "^8.2.4",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-preset-env": "^6.7.0",
+    "prettier": "^2.2.1",
+    "prop-types": "^15.7.2",
+    "rimraf": "^3.0.2",
+    "tailwindcss": "^2.0.2"
   }
 }

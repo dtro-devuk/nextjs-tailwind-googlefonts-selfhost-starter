@@ -1,0 +1,21 @@
+/*
+ * Grandstander Variable fonts
+ */
+
+@font-face {
+    font-family: 'Grandstander Variable';
+    font-style: normal;
+    font-weight: 100 900;
+    src: local('Granstander'),
+      url(Grandstander-VariableFont_wght.ttf) format('truetype');
+    font-display: swap; /* Perf optimization - See https://web.dev/font-display */
+    };
+
+@font-face {
+    font-family: 'Grandstander Variable';
+    font-style: normal;
+    font-weight: 100 900;
+    src: local('Granstander'),
+        url(Grandstander-Italic-VariableFont_wght.ttf) format('truetype');
+    font-display: swap;  /* Perf optimization - See https://web.dev/font-display */
+    };

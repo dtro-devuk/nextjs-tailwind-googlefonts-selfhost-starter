@@ -1,9 +1,26 @@
+import { useEffect, useState } from 'react';
+import { useGoogleFontLoader } from '@/lib/hooks.js';
+
 import Container from '@/components/Container';
+import { licenseInfo } from '@/components/Container';
+import LicenseBanner from '@/components/LicenseBanner';
 
 const Home = () => {
+  const [isMounted, setIsMounted] = useState(false);
+  const googleLicenseInfo = licenseInfo;
+
+  if (isMounted) {
+    useGoogleFontLoader();
+  }
+
+  useEffect(() => {
+    setIsMounted(true); // Set to true when the component is mounted
+  }, []);
+
   return (
     <Container>
       <>
+        <LicenseBanner licenseInfo={googleLicenseInfo} />
         <h1
           role="heading"
           aria-level="1"
@@ -11,6 +28,7 @@ const Home = () => {
         >
           The Sample Fonts follow...
         </h1>
+
         <hr />
         <h2 role="heading" aria-level="2" className=" p-3 text-center text-blue-900 font-bold">
           Sans Examples
@@ -67,7 +85,7 @@ const Home = () => {
           <h3
             role="heading"
             aria-level="3"
-            className="font-Oswald-VariableFont_wght p-3 text-center text-blue-900 font-bold"
+            className="font-sans p-3 text-center text-blue-900 font-bold"
           >
             Oswald Fonts 100-900
           </h3>

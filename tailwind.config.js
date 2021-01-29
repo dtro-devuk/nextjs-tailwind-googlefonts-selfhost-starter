@@ -18,7 +18,7 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     fontFamily: {
-      sans: ['Oswald Variable, Arial', fontFamily.serif],
+      sans: ['Oswald Variable, Arial', fontFamily.sans],
       serif: ['Merriweather Sans, Georgia', fontFamily.serif],
     },
     extend: {
