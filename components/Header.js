@@ -5,6 +5,7 @@
  */
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+
 import Avatar from '@/components/Avatar';
 import GitHubCodeLink from '@/components/GitHubCodeLink';
 
